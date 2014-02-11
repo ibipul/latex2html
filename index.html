@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Latex2html by ibipul</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Latex2html</h1>
+        <p>LaTeX to Html converter, using Flex and Bison</p>
+
+        <p class="view"><a href="https://github.com/ibipul/latex2html">View the Project on GitHub <small>ibipul/latex2html</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ibipul/latex2html/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ibipul/latex2html/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ibipul/latex2html">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Project Members</p>
+
+<hr><ul>
+<li>Bipul Islam</li>
+<li>HIrak Sarkar</li>
+<li>Ritankar Mandal</li>
+</ul><hr><h1>
+<a name="latex-to-html-converter" class="anchor" href="#latex-to-html-converter"><span class="octicon octicon-link"></span></a>Latex to Html Converter</h1>
+
+<p>Here flex (LEX) and bison (YACC) has been used to design a Html to Latex Converter. The parser part is tackled by a flex script, and the Bison takes care of the conversion grammer.</p>
+
+<ul>
+<li>The converter is successful for moderately complex LaTeX files. Highly intricate preambles may cause the program to fail. </li>
+<li>Mathematical expressions have been tackled in the sense the greek alphabets are represented in their true form in the Html files, however, all Complex mathematical expressions may not be successfully converted. Grammer still needs work.</li>
+<li>Standard latex Tables have been implemented, but there is a chance varied tabular depictions may fail. </li>
+<li>All shift-reduce, reduce reduce conflicts could not be completely removed. Implementation works reasonably well for the LaTeX files of the type of example .tex file that has been included.</li>
+</ul><blockquote>
+<h5>
+<a name="note-this-was-developed-as-a-part-of-second-year-first-semester-compiler-design-course-assignment-indian-statistical-institute-kolkata-course-was-taken-by-prof-mandar-mitra" class="anchor" href="#note-this-was-developed-as-a-part-of-second-year-first-semester-compiler-design-course-assignment-indian-statistical-institute-kolkata-course-was-taken-by-prof-mandar-mitra"><span class="octicon octicon-link"></span></a><em>Note: This was developed as a part of Second Year, First semester Compiler design course assignment Indian Statistical Institute (Kolkata). Course was taken by Prof. Mandar Mitra.</em>
+</h5>
+</blockquote>
+
+<h4>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h4>
+
+<hr><pre><code>flex latex2html.l
+yacc -d -t latex2html.y
+gcc -o latex2html y.tab.c lex.yy.c -lfl
+</code></pre>
+
+<p>or you can use the included <strong>command.sh</strong> shell script</p>
+
+<pre><code>$sh command.sh
+</code></pre>
+
+<p>This will generate an object file named: <strong>latex2html</strong>
+If for example we want to parse the example <strong>.tex</strong> file included we'll execute the following command</p>
+
+<pre><code>./latex2html sample-filename.html &lt; turing.tex &gt; log.txt
+</code></pre>
+
+<p>The .tex file has to be included within left (&lt;) and right (&gt;) angular brackets, they are used as the redirecting operators.</p>
+
+<p>Log file will be useful for debugging, incase of errors, where exactly in the input <em>.tex</em> file the parsing had failed.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ibipul">ibipul</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
