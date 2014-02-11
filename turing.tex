@@ -1,0 +1,262 @@
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{graphicx}
+
+\input{macros.tex}
+
+\title{\textbf{Turing Machine and its Applications}}
+\author{Mandar Mitra \\ Indian Statistical Institute, Kolkata}
+\date{jan 17 2000}
+
+\begin{document}
+
+
+\section{Introduction}
+Turing Machines  were first  conceived by Turing  and described in  a paper
+that appeared in the \emph{Proceedings of the London Mathematical Society},
+1936. Broadly speaking, Turing introduced this model in order to argue that
+any  computer  program  can  be  executed  on  a  suitably  defined  simple
+machine. The model  has proved to be the most  widely accepted formal model
+of computational processes. Before looking at the details of the definition
+and  operation of  a Turing  Machine,  we briefly  define some  terminology
+related to the issue of representation.
+
+\param{Representation:}    Any   \emph{representation}    of   information,
+processes, etc. is in terms  of certain \emph{symbols}. Rather than attempt
+to define what a  symbol is, we will assume that the  notion of a symbol is
+intuitively  clear.  Any  set of  symbols is  termed an  \emph{alphabet}. A
+sequence of symbols is called a \emph{string}. A set of strings is called a
+\emph{language}.
+
+
+\section{Definition and Operation}
+A  good  model  for  computational  processes  has to  have  at  least  two
+properties. First, the model must be  simple enough to allow us to formally
+reason about  computers.  Secondly, it must be  representative of computers
+as  we know  them, i.e.  the model  must retain  the essential  features of
+computers while  abstracting away the  details. Consider the  components of
+the computers we see around us:
+\begin{enumerate}
+\item  the  processing cabinet  contains  the  actual  processor (CPU)  and
+  storage devices (disks)
+\item the keyboard and monitor provide means for conveying data/information
+  to and from the computer
+\end{enumerate}
+Accordingly,  the Turing  Machine also  has  a processing  unit called  the
+finite  control, and  an  unlimited quantity  of  tape that  simultaneously
+serves as storage and means for input and output. The finite control can be
+in  one of  a finite  number of  \emph{states}.  The  tape is  divided into
+squares,  each of  which can  hold a  single symbol.  Any  ``empty'' square
+(i.e. one  that has  not been written  into) is  assumed to hold  a special
+\emph{blank} symbol.  A read-write head  communicates between the  tape and
+the control: it reads the tape and informs the control of what it has read;
+it  also writes  information onto  the tape  according to  the instructions
+given by the control unit. 
+
+\bskip
+
+
+The machine works as follows: the data  that we want to provide as input is
+written onto the tape, one symbol per square, and the head is positioned at
+the beginning (or  end, depending on the adopted  convention) of the input.
+The  finite control  is put  into  a designated  \emph{initial} state.  The
+machine then starts computation. At each step, the machine reads the symbol
+in  the current tape  square, and based on its current state, and the
+symbol just read, the finite control takes  the following actions:
+\begin{enumerate}
+\item changes to a new state, ~ \textsc{and}
+\item 
+  \begin{enumerate}
+  \item either moves the head one square to the left or right, ~ \textsc{or}
+  \item writes a symbol into the current square.
+  \end{enumerate}
+\end{enumerate}
+The  machine  is  expected  to  eventually  change  state  to  a  specially
+designated state called the \emph{halt}  state. This signals the end of the
+computation. Of  course, it is also  possible that the  machine never halts
+--- in that case, it does  not produce any useful output. Another situation
+that may  arise is that the  read-write head of  the machine may be  on the
+very first square of the tape, and the finite control may instruct the head
+to move left.  If this does happen, the machine stops operating and is said
+to \emph{hang}. Note that this is different from halting. \\
+Formally, a Turing Machine can now be defined as follows.
+
+\begin{center}
+  \begin{minipage}{0.85\textwidth}
+\textbf{Definition:}  A Turing  Machine  (TM) is  a  quadruple $\langle Q,  \Sigma , \delta , s  \rangle $ where \\
+\begin{tabular}{l c l}
+$q_1$ & $q_2$ \\
+       $q_1$ & $q_2$ & $ x= \frac{(\alpha \beta)}{\delta}$ \\
+       $\lambda$ & $\epsilon$  \\
+\end{tabular}
+  \end{minipage}
+\end{center}
+
+
+\section{Computing with TMs}
+We now turn to the question of how one can actually use the TM as a
+computer. TMs can broadly be used in the following ways:
+\begin{enumerate}
+\item to compute a function from strings to strings: given an input string
+  (or strings), the TM computes a suitable output string;
+\item to compute a function from numbers to numbers;
+\item to determine whether a given string belongs to a certain language.
+\end{enumerate}
+
+Note that  most uses of real  computers can be classified  under (1) above.
+Typically, we  provide some input data  to the computer; this  is the input
+string.  The  computer  computes some  result  in  the  form of  an  output
+string. In  fact, the  second and  third uses mentioned  above can  also be
+regarded as special cases of (1).
+
+Before actually constructing a TM that can be used to perform some function
+mentioned  above,  we  need  to  decide  an  input/output  convention.  The
+following convention is  commonly adopted: the first square  of the tape is
+left  blank, the  input string  is written  into the  tape, one  symbol per
+square, starting from the second square,  and the head is positioned on the
+blank  square  immediately following  the  input  (see  Figure~1). We  also
+require the output to be given on the tape in the same format. 
+
+We  conclude  this  section with  a  TM  $M$  that computes  the  following
+function. Given  an input string  over the alphabet $\{a,b\}$,  it replaces
+each $a$  by $b$ and vice versa.  Thus, given $aab$ as  input, $M$ produces
+$bba$ as output. The formal  construction of $M$ will consist of specifying
+the quadruple  $\langle Q,  \Sigma , \delta , s  \rangle $ that makes  up $M$.
+$M$ is thus given by:
+
+$s = q_0$ \\
+$\delta :$
+
+\mskip
+
+
+
+\section{Extensions}
+Apart from  the basic model  described above, certain extended  versions of
+Turing  Machines have  also been  studied. Some  of the  extensions  to the
+Turing Machine model that have been investigated are: ~(i)~allowing several
+tapes instead of just one; ~(ii)~allowing several heads on the tape instead
+of just one; ~(iii)~allowing the tape to be two-dimensional (i.e. like a
+page) instead of one-dimensional (linear).
+
+It has been  found that these extensions sometimes  make computation easier
+or more efficient.  For example, it may be easier to  construct a 2-tape or
+3-tape machine for solving certain problems. However, it can be proved that
+the standard  model can imitate or  simulate the operation  of any extended
+model proposed till date. In other words, any function that can be computed
+by an  extended model can also be  computed by the basic  model. Of course,
+the basic model may require a larger number of steps to do the computation.
+
+
+\section{Universal Turing Machine}
+The  only  example TM  that  we have  considered  above  performs a  fairly
+elementary operation.   If Turing Machines are  to be more  convincing as a
+good  model for  real-life  computers, we  should  be able  to construct  a
+general-purpose   Turing  Machine   that  is   capable  of   ``running  any
+program''. The Universal  Turing Machine (UTM) is precisely  this sort of a
+TM: it takes  a particular program and input data, and  runs the program on
+the given data.
+
+Formally,  a program  is represented  by a  suitable TM  that  performs the
+function of that program. In order to  provide a TM as one of the inputs to
+the UTM,  we need to  be able to  represent any TM  by a string.   For this
+purpose, we assume that there  are two (countably infinite) sets $Q_\infty$
+and  $\Sigma_\infty$ containing,  respectively, all  the state  and alphabet
+symbols that we ever need:
+\begin{math}
+Q_\infty = \{ q_1, q_2, \ldots \}
+ 
+\end{math}
+
+We now choose a specific symbol, say $I$, and represent all elements of $ Q $
+and $\Sigma $,  as well as $h,  L, R$ by  strings of $I$s. For  example, $h$
+could  be  represented  as $I$,  $q_1$  as  $II$,  $q_2$  as $III$  and  so
+on. Likewise, $L$ could be represented as $I$, $R$ as $II$, $a_1$ as $III$,
+etc. If we now  choose a second symbol, say $0$, and  use it as a separator
+symbol, we  can represent a specific TM  $M = \langle Q,  \Sigma , \delta , s  \rangle $ 
+  using  the   above-mentioned  convention  for  representing  each
+individual state and symbol. Let us denote this string representation of $M$
+as $enc(M)$.
+
+We can now informally outline the construction of a TM, $U$ with 4 tapes
+that works as a UTM. In other words, given a TM and a string as input, both
+encoded using  the above scheme,  $U$ simulates the  given TM on  the given
+string,  and produces  the  desired  output (also  encoded  using the  same
+scheme).
+
+$U$ starts with  encoded representations of an input  TM (say $enc(M)$) and
+string (say  $enc(w)$) on the first  tape. The other tapes  are blank.  $U$
+first copies  $enc(M)$ onto  the second tape,  and $enc(w)$ onto  the third
+tape.  From  $enc(M)$, it extracts  and copies the string  representing the
+initial state onto the fourth tape.
+
+$U$ now simulates each step of  $M$. During the simulation, the 4 tapes are
+used  as follows:  tape 1  always holds  the original  input  ($enc(M)$ and
+$enc(w)$), tape 2 stores $enc(M)$, tape  3 is used to represent $M$'s tape,
+and tape 4 stores the current state and input symbol of $M$.  
+
+More specifically, $U$ copies the  input symbol currently being read by $M$
+from tape 3 to tape 4. It now  looks for an entry for the current state and
+input symbol pair in the transition function of $M$ stored on tape 2.  This
+entry  specifies the  new state  and a  suitable action.  The new  state is
+recorded on tape 4, and tape 3 is modified in accordance with the specified
+action.  Thus, it  is easy to see that $U$ needs  several steps to simulate
+one step  of $M$.  This process  continues, and when $M$  halts, the output
+produced by $M$ can be found on tape 3.
+
+
+\section{Undecidability}
+We  now   come  to  the  question   of  what  a  computer   can  or  cannot
+compute. Specifically, we consider the following problem: is it possible to
+say, given any TM $M$, and input  string $w$, whether $M$ will halt on $w$?
+
+Suppose we assume that it is  indeed possible to write a program $P_0$ that
+answers this question for any given $M$ and $w$. 
+
+Then it  must also be  possible to write  a program $P_1$ that  answers the
+following question:
+
+\mskip   \centerline{    Given   any   TM    $ M $,   does   $ M $    halt   on
+$enc(M)$  
+? \footnote{Recall  that $enc(M)$  is the  string  representation of
+$M$.} }
+
+\mskip $P_1$ takes  its input $M$, constructs the string  $w = enc(M)$, and
+passes $M,w$ to program $P_0$. $P_1$ returns to the user whatever answer it
+gets from $P_0$.
+
+Now, we construct  a program $P'_1$ which works as  follows: given an input
+$w$, $P'_1$  first passes  the input  to $P_1$. If  the answer  returned by
+$P_1$ is ``no'', $P'_1$ prints this  on the screen and stops. If the answer
+returned  by $P_1$  is  ``yes'',  then $P'_1$  intentionally  goes into  an
+infinite loop, so it never stops.
+
+Since $P'_1$  is a program, we  can construct a Turing  Machine $M'_1$ that
+performs the same function as $P'_1$. Now consider what happens when $M'_1$
+is run on  $enc(M'_1)$. $M'_1$ will first pass $enc(M'_1)$  to $P_1$ (or an
+equivalent TM).
+
+If $M'_1$ halts on $enc(M'_1)$,  then $P_1$ answers ``yes'', so $M'_1$ goes
+into an  infinite loop and does  not halt.  Conversely, if  $M'_1$ does not
+halt on  $enc(M'_1)$, then $P_1$ answers  ``no'', so $M'_1$  writes this on
+the output tape and halts. In summary, if $M'_1$ halts on $enc(M'_1)$, then
+it   does  not  halt   on  $enc(M'_1)$,   and  vice   versa.   This   is  a
+contradiction.  Thus, the  assumption  that  it is  possible  to write  the
+program $P_0$ must  have been mistaken. In other words,  there is no Turing
+Machine (or equivalently, no program)  that can tell, given another program
+and some input data, whether the latter will halt on the given input.
+
+This is arguably the most important application of Turing Machines: using a
+formal model,  one is able to prove  that there is a  concrete problem that
+cannot be  solved using  computers. Using this  problem, it is  possible to
+show that certain other  problems, encountered in real-life situations, are
+also unsolvable.   The interested reader  can refer to~\cite{foo}  for more
+details. 
+\begin{thebibliography}{}
+\bibitem[1]{foo}
+\emph{Elements of the Theory of Computation}. H.R. Lewis and
+C.H. Papadimitriou, Prentice-Hall Inc., 1981.
+\end{thebibliography}
+
+\end{document}
