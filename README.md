@@ -1,10 +1,8 @@
-Authors
+Author
 
 -------
 
  - Bipul Islam
- - HIrak Sarkar
- - Ritankar Mandal
 
 ----------------
 
