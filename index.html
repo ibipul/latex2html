@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>latex2html — LaTeX to HTML in your browser</title>
+<meta name="description" content="Paste or upload a LaTeX document and get a clean, standalone HTML page. Runs entirely in your browser; nothing is uploaded.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f6feb'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-style='italic' fill='white' text-anchor='middle'%3ETeX%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="app/app.css">
+<script type="module" src="app/app.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">latex<span>2</span>html</span>
+    <span class="tagline">LaTeX → HTML, entirely in your browser. Nothing is uploaded.</span>
+  </div>
+  <nav><a href="https://github.com/ibipul/latex2html" target="_blank" rel="noopener">GitHub</a></nav>
+</header>
+
+<main class="workspace">
+  <section class="pane source-pane" id="sourcePane" aria-label="LaTeX source">
+    <div class="toolbar">
+      <span class="pane-title">LaTeX</span>
+      <label class="btn" title="Open a .tex file, plus any \input files and images it uses">
+        Open files…
+        <input type="file" id="fileInput" multiple accept=".tex,.ltx,.sty,.cls,.txt,image/*,.pdf">
+      </label>
+      <select id="example" aria-label="Load an example">
+        <option value="">Examples…</option>
+        <option value="examples/showcase.tex">Feature tour</option>
+        <option value="examples/turing.tex">Turing machines (original sample)</option>
+      </select>
+      <button type="button" class="btn ghost" id="clear">Clear</button>
+    </div>
+    <div class="files" id="files" hidden></div>
+    <div class="editor-wrap">
+      <textarea id="source" spellcheck="false" autocapitalize="off" autocomplete="off"
+        placeholder="Paste LaTeX here, or drop a .tex file (and its images) onto this pane."></textarea>
+      <div class="drop-overlay" aria-hidden="true">Drop .tex and image files</div>
+    </div>
+  </section>
+
+  <section class="pane output-pane" aria-label="HTML output">
+    <div class="toolbar">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-view="preview">Preview</button>
+        <button type="button" role="tab" aria-selected="false" data-view="code">HTML</button>
+      </div>
+      <select id="mathMode" aria-label="Math output" title="How math is written into the HTML file">
+        <option value="katex">Math: KaTeX (styled)</option>
+        <option value="mathml">Math: MathML (no CSS needed)</option>
+      </select>
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" id="copy">Copy HTML</button>
+      <button type="button" class="btn primary" id="download">Download .html</button>
+    </div>
+    <div class="output-body">
+      <iframe id="preview" title="Preview" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+      <pre id="code" hidden><code></code></pre>
+    </div>
+    <footer class="status">
+      <span id="status">Loading…</span>
+      <details id="warnings" hidden>
+        <summary></summary>
+        <ul></ul>
+      </details>
+    </footer>
+  </section>
+</main>
+</body>
+</html>

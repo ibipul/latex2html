@@ -1,0 +1,124 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amsthm, hyperref, booktabs}
+
+% Your own macros work in text and in math.
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\tool}{\texttt{latex2html}}
+\DeclareMathOperator{\tr}{tr}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\title{A Tour of \tool}
+\author{Ada Lovelace \and Alan Turing}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document shows what the converter handles. Edit it on the left and the
+preview updates as you type. When you're happy, download a single
+self-contained HTML file.
+\end{abstract}
+
+\tableofcontents
+
+\section{Text}
+Paragraphs are separated by blank lines. You get \textbf{bold}, \textit{italic},
+\emph{emphasis}, \texttt{monospace}, \textsc{Small Caps} and \underline{underline};
+``curly quotes'', dashes (1--10, and---like this), accents (caf\'e, na\"ive,
+Erd\H{o}s), and the \LaTeX{} logo.%
+\footnote{Footnotes are collected at the end, with links back to the text.}
+
+{\bfseries Declarations} such as \verb|\bfseries| stay inside their group.
+Links work too: \href{https://www.latex-project.org}{the \LaTeX{} project}
+and \url{https://github.com/ibipul/latex2html}.
+
+\subsection{Lists}
+\begin{itemize}
+  \item A bullet point.
+  \item A nested numbered list:
+  \begin{enumerate}
+    \item first \label{item:first}
+    \item second
+  \end{enumerate}
+  \item[$\star$] A custom label.
+\end{itemize}
+
+\begin{description}
+  \item[Input] A \texttt{.tex} file or pasted source.
+  \item[Output] One standalone HTML page.
+\end{description}
+
+\section{Mathematics}\label{sec:math}
+Inline math such as $e^{i\pi} + 1 = 0$ or \(\norm{x}_2 \le \sqrt{n}\,\norm{x}_\infty\)
+is rendered with KaTeX. Numbered equations can be referenced:
+\begin{equation}\label{eq:gauss}
+  \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}.
+\end{equation}
+Aligned systems:
+\begin{align}
+  f(x) &= \sum_{k=0}^{\infty} \frac{f^{(k)}(0)}{k!} x^k \label{eq:taylor} \\
+  \tr(AB) &= \tr(BA) \quad \text{for } A, B \in \R^{n \times n}
+\end{align}
+Unnumbered display math:
+\[ \det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc. \]
+
+Equation~\eqref{eq:gauss} is the Gaussian integral and \eqref{eq:taylor} is a
+Taylor series; both live in Section~\ref{sec:math}.
+
+\begin{definition}
+A function $f\colon \R \to \R$ is \emph{convex} if
+$f(tx + (1-t)y) \le t f(x) + (1-t) f(y)$ for all $x, y$ and $t \in [0,1]$.
+\end{definition}
+
+\begin{theorem}[Jensen]\label{thm:jensen}
+If $f$ is convex then $f(\mathbb{E}[X]) \le \mathbb{E}[f(X)]$.
+\end{theorem}
+
+\begin{proof}
+Take a supporting line at $\mathbb{E}[X]$ and use linearity of expectation.
+\end{proof}
+
+\section{Tables and figures}
+Table~\ref{tab:results} uses \texttt{booktabs} rules and a spanning header.
+
+\begin{table}[h]
+  \centering
+  \caption{Results by method.}\label{tab:results}
+  \begin{tabular}{l|cc}
+    \toprule
+    & \multicolumn{2}{c}{Score} \\
+    Method & Precision & Recall \\
+    \midrule
+    Baseline & 0.71 & 0.64 \\
+    Ours     & \textbf{0.83} & \textbf{0.79} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Images given to \verb|\includegraphics| are embedded when you open them along
+with the \texttt{.tex} file.
+
+\begin{verbatim}
+\begin{figure}
+  \includegraphics[width=0.6\textwidth]{plot.png}
+  \caption{Uploaded images are embedded.}
+\end{figure}
+\end{verbatim}
+
+\section{References}
+Cross-references (Theorem~\ref{thm:jensen}, item~\ref{item:first}) and
+citations~\cite{knuth84, lamport94} become links.
+
+\begin{thebibliography}{9}
+\bibitem{knuth84} Donald E. Knuth. \emph{The \TeX book}. Addison-Wesley, 1984.
+\bibitem{lamport94} Leslie Lamport. \emph{\LaTeX: A Document Preparation System}.
+  Addison-Wesley, 2nd edition, 1994.
+\end{thebibliography}
+
+\end{document}

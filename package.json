@@ -1,0 +1,32 @@
+{
+  "name": "latex2html",
+  "version": "2.0.0",
+  "description": "Convert LaTeX documents to clean, standalone HTML in the browser or from the command line.",
+  "type": "module",
+  "private": true,
+  "license": "GPL-2.0-only",
+  "author": "Bipul Islam",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ibipul/latex2html.git"
+  },
+  "main": "src/latex2html.js",
+  "exports": "./src/latex2html.js",
+  "bin": {
+    "latex2html": "bin/latex2html.js"
+  },
+  "files": [
+    "src",
+    "bin"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 8000"
+  },
+  "dependencies": {
+    "katex": "0.16.11"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
